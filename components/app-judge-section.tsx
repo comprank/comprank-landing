@@ -31,10 +31,10 @@ export function AppJudgeSection() {
               Vos juges scorent, même quand le réseau lâche.
             </h2>
             <p className="mt-5 max-w-[58ch] text-lg text-pretty text-gray-400">
-              Sur l’app CompRank, chaque juge compte les reps, note les no reps
-              et valide la Scorecard de son Couloir. Les scores restent sur le
-              téléphone pendant une coupure, puis partent dès que le réseau
-              revient.
+              L’app juge CompRank fonctionne hors ligne : pendant une coupure,
+              les scores restent sur le téléphone, puis partent dès que le
+              réseau revient. Chaque juge y compte les reps, note les no reps
+              et valide la Scorecard de son Couloir.
             </p>
 
             <ul role="list" className="mt-8 space-y-3">

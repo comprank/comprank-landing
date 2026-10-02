@@ -130,7 +130,7 @@ export function CompetitionLanding({
   };
 
   return (
-    <main className="isolate pt-16">
+    <main id="contenu" className="isolate pt-16">
       <JsonLd data={structuredData} />
 
       <section className="relative overflow-hidden bg-dark-900 py-20 sm:py-24 lg:py-28">

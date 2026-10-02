@@ -110,14 +110,14 @@ function PrimaryCategories() {
       label: "CrossFit",
       title: "Workouts, divisions, heats et scoring mobile",
       description:
-        "Préparez le déroulé, équipez vos juges et publiez un leaderboard actualisé à chaque score.",
+        "Pour une compétition CrossFit, CompRank gère les workouts, les divisions, les heats et le scoring mobile des juges. Préparez le déroulé, équipez vos juges et publiez un leaderboard actualisé à chaque score.",
     },
     {
       href: "/competition-hyrox",
       label: "HYROX",
       title: "Catégories, vagues, stations et temps intermédiaires",
       description:
-        "Suivez les départs et les splits station par station jusqu’au classement final.",
+        "Pour une compétition HYROX, CompRank gère les catégories, les vagues de départ, les stations et les temps intermédiaires. Suivez les départs et les splits station par station jusqu’au classement final, avec le chronométrage RFID en option.",
     },
   ];
 
@@ -132,7 +132,8 @@ function PrimaryCategories() {
             Une organisation pensée pour CrossFit et HYROX
           </h2>
           <p className="max-w-[48ch] text-lg text-pretty text-gray-400">
-            Chaque discipline dispose de son propre déroulé, tout en gardant
+            CompRank gère les compétitions CrossFit et HYROX : chaque
+            discipline dispose de son propre déroulé, tout en gardant
             inscriptions, terrain et résultats dans la même plateforme.
           </p>
         </div>
@@ -187,7 +188,7 @@ function LeaderboardSection() {
               </span>
             </h2>
             <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-              Chaque score validé par un juge met à jour instantanément le classement sur tous les écrans — téléphones, tablettes, écran géant.
+              Le classement CompRank se met à jour en temps réel : chaque score validé par un juge l’actualise instantanément sur tous les écrans — téléphones, tablettes, écran géant. Partagez-le par lien public ou réservez-le aux officiels.
             </p>
 
             <div className="grid grid-cols-3 gap-4">
@@ -273,7 +274,7 @@ function SmartPlannerSection() {
                 <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">avant le jour J</span>
               </h2>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Choisissez les workouts, les divisions, l&apos;heure de début et la capacité. Le Smart Planner prépare un brouillon que vous pouvez ajuster avant validation.
+                Avec le Smart Planner de CompRank, vos heats sont planifiés avant le jour J. Choisissez les workouts, les divisions, l&apos;heure de début et la capacité : le Smart Planner prépare un brouillon que vous pouvez ajuster avant validation.
               </p>
               <ul className="space-y-3">
                 {["Workouts et divisions dans l'ordre voulu", "Heures recalculées quand un heat bouge", "Brouillon gardé localement avant validation"].map((item, i) => (
@@ -336,6 +337,10 @@ function OtherFeaturesGrid() {
       <div className="container-custom">
         <div className={`text-center mb-12 ${anim}`}>
           <h2 className="text-3xl md:text-4xl font-bold text-white">Tout pour vos compétitions</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-pretty text-gray-400">
+            CompRank réunit les inscriptions, le scoring, le feedback athlètes,
+            la liste d’attente et la planification dans un seul outil.
+          </p>
         </div>
         <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 ${anim}`}>
           {features.map((f, i) => (
@@ -371,6 +376,10 @@ function HowItWorksSection() {
             Comment{" "}
             <span className="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">ça marche</span>
           </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-pretty text-gray-400">
+            Avec CompRank, une compétition s’organise en six étapes, de la
+            création de l’événement à la publication du classement.
+          </p>
         </div>
 
         <div className={`relative max-w-5xl mx-auto ${anim}`}>
@@ -508,7 +517,7 @@ export default function Page() {
   };
 
   return (
-    <main className="isolate">
+    <main id="contenu" className="isolate">
       <JsonLd data={structuredData} />
       <Hero />
       <PrimaryCategories />

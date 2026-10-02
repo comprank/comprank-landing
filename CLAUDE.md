@@ -83,6 +83,16 @@ The homepage has been fully redesigned with:
 - Tracks `Lead` (defensive `window.fbq` call, production only) when the lead dialog form is submitted successfully. Honeypot submissions are excluded client-side (`isHoneypotFilled` on the submitted input), and the event only fires on an explicit `{ success: true }` payload — a network failure leaves the next-safe-action hook result empty, which it otherwise reports as success.
 - **No consent gate yet.** The pixel drops cookies unconditionally, which is not GDPR/CNIL-compliant. A cookie banner is planned as separate work; the pixel is isolated in its own component so the gate can wrap it without touching the layout.
 
+### Security Headers
+
+- `next.config.ts` `headers()` sends Content-Security-Policy, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin` and a restrictive `Permissions-Policy` on every route.
+- The CSP keeps `'unsafe-inline'` on `script-src` on purpose: Next inlines its RSC payload and the Meta Pixel is an inline script. Nonces would force every page to render dynamically and drop static prerendering.
+- **Any new third-party script, image, font or iframe origin must be added to the CSP**, otherwise the browser blocks it silently. Current allowances: `connect.facebook.net` (script/connect) and `www.facebook.com` (img/connect) for the pixel; `vercel.live` and friends only when `VERCEL_ENV === "preview"` (Vercel toolbar); `'unsafe-eval'` only in development.
+
+### Accessibility
+
+- `app/layout.tsx` renders a visually hidden "Aller au contenu principal" skip link as the first focusable element. It targets `#contenu`, so **every page's `<main>` must carry `id="contenu"`**.
+
 ### Crawler and AI Agent Discovery
 
 - **`app/robots.txt/route.ts`** — plain route handler, not Next's `MetadataRoute.Robots` metadata file (which has no escape hatch for custom directives). Serves the standard `Allow` / `Sitemap` / `Host` lines plus a `Content-Signal` directive (https://contentsignals.org/).

@@ -135,9 +135,11 @@ export function DayOfEventSection() {
             Le jour J, on vient avec le matériel.
           </h2>
           <p className="mt-4 max-w-2xl text-lg text-pretty text-gray-400">
-            Deux prestations distinctes complètent le logiciel : la Régie live
-            + TV live pour vos compétitions FUNCTIONAL, et le chronométrage par
-            puces RFID pour vos courses HYROX.
+            Le jour de la compétition, CompRank vient sur place avec le
+            matériel et une personne de l’équipe. Deux prestations distinctes
+            complètent le logiciel : la Régie live + TV live pour vos
+            compétitions FUNCTIONAL, et le chronométrage par puces RFID pour
+            vos courses HYROX.
           </p>
         </div>
 
@@ -151,10 +153,12 @@ export function DayOfEventSection() {
               <Badge variant="outline">FUNCTIONAL</Badge>
             </div>
             <p className="mb-6 text-base text-pretty text-gray-400 sm:text-sm">
-              CompRank installe le Kit Régie sur place. Les juges comptent sur
-              les téléphones fournis, le Départ et le chrono sont partagés sur
-              tous les Couloirs, et la TV live affiche les reps pendant chaque
-              Vague. Tout continue sur le réseau local si internet coupe.
+              La Régie live + TV live est une prestation sur place pour les
+              compétitions FUNCTIONAL. CompRank installe le Kit Régie. Les
+              juges comptent sur les téléphones fournis, le Départ et le chrono
+              sont partagés sur tous les Couloirs, et la TV live affiche les
+              reps pendant chaque Vague. Tout continue sur le réseau local si
+              internet coupe.
             </p>
             <TvLiveMockup />
           </Card>
@@ -168,10 +172,11 @@ export function DayOfEventSection() {
               <Badge variant="outline">HYROX</Badge>
             </div>
             <p className="mb-6 text-base text-pretty text-gray-400 sm:text-sm">
-              Chaque athlète porte une puce RFID sur une sangle de cheville. Ses
-              passages sont détectés automatiquement ; à l’arrivée, CompRank
-              calcule son temps total, le détail Course et Stations, et sa
-              position dans sa division.
+              Le chronométrage par puces RFID est une prestation sur place pour
+              les courses HYROX. Chaque athlète porte une puce RFID sur une
+              sangle de cheville. Ses passages sont détectés automatiquement ;
+              à l’arrivée, CompRank calcule son temps total, le détail Course
+              et Stations, et sa position dans sa division.
             </p>
             <HyroxTimingMockup />
           </Card>

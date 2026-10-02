@@ -339,6 +339,7 @@ export function Hero() {
                       key={id}
                       src={`/box/box-${id}.webp`}
                       alt=""
+                      loading="eager"
                       className="size-9 rounded-full object-cover outline outline-2 outline-dark-600"
                     />
                   ))}
