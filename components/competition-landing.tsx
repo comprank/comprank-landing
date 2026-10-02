@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
 import { LeadButton } from "@/components/lead-button";
+import { AppLink } from "@/components/app-link";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export type LandingFeature = {
@@ -324,6 +325,10 @@ export function CompetitionLanding({
               size="lg"
               variant="outline"
             />
+            <p className="text-base text-gray-400 sm:text-sm">
+              Envie d’explorer par vous-même ?{" "}
+              <AppLink placement="landing-cta" />
+            </p>
           </div>
         </div>
       </section>

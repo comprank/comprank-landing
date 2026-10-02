@@ -14,6 +14,7 @@ import Link from "next/link";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { LeadButton } from "@/components/lead-button";
+import { AppLink } from "@/components/app-link";
 
 export interface Athlete {
   name: string;
@@ -314,6 +315,15 @@ export function Hero() {
                 <Link href="#formats">Explorer les formats</Link>
               </Button>
             </motion.div>
+
+            <motion.p
+              variants={fadeUp}
+              custom={3}
+              className="mt-4 text-base text-gray-400 sm:text-sm"
+            >
+              Envie d’explorer par vous-même ?{" "}
+              <AppLink placement="hero" />
+            </motion.p>
 
             <motion.div
               variants={fadeUp}

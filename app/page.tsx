@@ -32,6 +32,7 @@ import { Hero } from "@/components/hero";
 import { AppJudgeSection } from "@/components/app-judge-section";
 import { DayOfEventSection } from "@/components/day-of-event";
 import { LeadButton } from "@/components/lead-button";
+import { AppLink } from "@/components/app-link";
 import { SmartPlannerDemo } from "@/components/smart-planner-demo";
 import { JsonLd } from "@/components/json-ld";
 import { createPageMetadata, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
@@ -443,6 +444,10 @@ function BottomCTA() {
                 showArrow
               />
             </div>
+            <p className="mt-6 text-base text-gray-400 sm:text-sm">
+              Envie d’explorer par vous-même ?{" "}
+              <AppLink placement="bottom-cta" />
+            </p>
           </div>
         </Card>
       </div>

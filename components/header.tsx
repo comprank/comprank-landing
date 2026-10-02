@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { CTA } from "./CTA";
+import { AppLink } from "./app-link";
 import { LeadDialog } from "./lead-dialog";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -55,7 +56,12 @@ export const Header = () => {
         </nav>
 
         <div className="flex flex-1 items-center justify-end gap-2">
-          <div className="hidden sm:block">
+          <div className="hidden items-center gap-5 sm:flex">
+            <AppLink
+              placement="header"
+              label="Ouvrir l’app"
+              className="text-sm font-normal text-gray-300 hover:text-white hover:no-underline"
+            />
             <CTA label="Démarrer" onClick={openLead} />
           </div>
 
@@ -98,13 +104,17 @@ export const Header = () => {
                       {item.label}
                     </Link>
                   ))}
-                  <div className="mt-2 border-t border-white/10 pt-3 sm:hidden">
+                  <div className="mt-2 flex flex-col gap-1 border-t border-white/10 pt-3 sm:hidden">
                     <CTA
                       label="Démarrer gratuitement"
                       onClick={() => {
                         closeMobileMenu();
                         openLead();
                       }}
+                    />
+                    <AppLink
+                      placement="header-mobile"
+                      className="rounded-md px-3 py-3 text-base font-normal text-gray-200 hover:bg-white/5 hover:text-white hover:no-underline sm:text-sm"
                     />
                   </div>
                 </nav>
