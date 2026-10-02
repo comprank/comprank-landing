@@ -4,8 +4,14 @@ export const SITE_NAME = "CompRank";
 export const SITE_URL = "https://www.comprank.fr";
 export const APP_URL = "https://app.comprank.fr";
 
+// Liens vers les fiches store de l'app mobile CompRank.
+export const IOS_APP_URL =
+  "https://apps.apple.com/fr/app/comprank/id6803938343";
+export const ANDROID_APP_URL =
+  "https://play.google.com/store/apps/details?id=com.comprank.comprank";
+
 export const SITE_DESCRIPTION =
-  "Gérez inscriptions, planning, scoring mobile et classements en direct avec CompRank, le logiciel conçu pour les compétitions CrossFit et HYROX en France.";
+  "Gérez inscriptions, planning, Scorecards et classements avec CompRank, plus Régie live et chrono RFID pour vos compétitions CrossFit et HYROX.";
 
 type PageMetadata = {
   title: string;

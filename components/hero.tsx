@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import {
-  ArrowRight,
   Star,
   Medal,
   Trophy,
@@ -14,9 +13,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { LeadDialog } from "@/components/lead-dialog";
+import { LeadButton } from "@/components/lead-button";
+import { AppLink } from "@/components/app-link";
 
-interface Athlete {
+export interface Athlete {
   name: string;
   box: string;
   points: number;
@@ -125,7 +125,7 @@ const fadeInRight = {
   },
 };
 
-function RankChangeIndicator({ rankChange }: { rankChange: number }) {
+export function RankChangeIndicator({ rankChange }: { rankChange: number }) {
   if (rankChange > 0) {
     return (
       <motion.div
@@ -213,6 +213,42 @@ function LeaderboardRow({ athlete }: { athlete: Athlete }) {
   );
 }
 
+/** La carte de classement animée d'origine. */
+function LeaderboardCard({ athletes }: { athletes: Athlete[] }) {
+  return (
+    <div className="relative bg-dark-700/60 backdrop-blur-xl border border-dark-400/60 rounded-2xl overflow-hidden shadow-2xl">
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-dark-400/40 bg-dark-800/40">
+        <div className="flex items-center gap-2.5">
+          <div className="flex items-center justify-center size-7 rounded-lg bg-primary-500/10">
+            <Trophy className="size-4 text-primary-500" />
+          </div>
+          <span className="text-sm font-semibold text-white">
+            Classement général
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+          <div className="size-1.5 bg-green-400 rounded-full animate-pulse" />
+          <span className="text-xs font-medium text-green-400">Live</span>
+        </div>
+      </div>
+
+      <LayoutGroup>
+        <div className="divide-y divide-dark-500/30">
+          {athletes.map((a) => (
+            <LeaderboardRow key={a.name} athlete={a} />
+          ))}
+        </div>
+      </LayoutGroup>
+
+      <div className="px-5 py-2.5 border-t border-dark-400/40 bg-dark-800/30">
+        <p className="text-xs text-gray-500 text-center">
+          Actualisation automatique &middot; 5 épreuves
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
   const athletes = useAnimatedScores();
 
@@ -270,16 +306,24 @@ export function Hero() {
               custom={3}
               className="flex flex-col sm:flex-row gap-3 mt-8"
             >
-              <LeadDialog>
-                <Button size="lg">
-                  Démarrer gratuitement
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Button>
-              </LeadDialog>
+              <LeadButton
+                label="Démarrer gratuitement"
+                size="lg"
+                showArrow
+              />
               <Button asChild size="lg" variant="outline">
                 <Link href="#formats">Explorer les formats</Link>
               </Button>
             </motion.div>
+
+            <motion.p
+              variants={fadeUp}
+              custom={3}
+              className="mt-4 text-base text-gray-400 sm:text-sm"
+            >
+              Envie d’explorer par vous-même ?{" "}
+              <AppLink placement="hero" />
+            </motion.p>
 
             <motion.div
               variants={fadeUp}
@@ -295,6 +339,7 @@ export function Hero() {
                       key={id}
                       src={`/box/box-${id}.webp`}
                       alt=""
+                      loading="eager"
                       className="size-9 rounded-full object-cover outline outline-2 outline-dark-600"
                     />
                   ))}
@@ -324,38 +369,7 @@ export function Hero() {
           >
             <div className="absolute -inset-6 bg-gradient-to-br from-primary-500/10 via-accent-500/5 to-transparent rounded-3xl blur-2xl" />
 
-            <div className="relative bg-dark-700/60 backdrop-blur-xl border border-dark-400/60 rounded-2xl overflow-hidden shadow-2xl">
-              <div className="flex items-center justify-between px-5 py-3.5 border-b border-dark-400/40 bg-dark-800/40">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex items-center justify-center size-7 rounded-lg bg-primary-500/10">
-                    <Trophy className="size-4 text-primary-500" />
-                  </div>
-                  <span className="text-sm font-semibold text-white">
-                    Classement général
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 border border-green-500/20">
-                  <div className="size-1.5 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-xs font-medium text-green-400">
-                    Live
-                  </span>
-                </div>
-              </div>
-
-              <LayoutGroup>
-                <div className="divide-y divide-dark-500/30">
-                  {athletes.map((a) => (
-                    <LeaderboardRow key={a.name} athlete={a} />
-                  ))}
-                </div>
-              </LayoutGroup>
-
-              <div className="px-5 py-2.5 border-t border-dark-400/40 bg-dark-800/30">
-                <p className="text-xs text-gray-500 text-center">
-                  Actualisation automatique &middot; 5 épreuves
-                </p>
-              </div>
-            </div>
+            <LeaderboardCard athletes={athletes} />
           </motion.div>
         </div>
       </div>

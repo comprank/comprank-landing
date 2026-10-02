@@ -4,6 +4,7 @@ import Link from "next/link";
 const footerLinks = [
   { href: "/competition-crossfit", label: "Logiciel compétition CrossFit" },
   { href: "/competition-hyrox", label: "Logiciel compétition HYROX" },
+  { href: "/#offre", label: "Le jour J" },
   { href: "/#features", label: "Fonctionnalités" },
   { href: "/#faq", label: "Questions fréquentes" },
   { href: "/terms", label: "Conditions d’utilisation" },
@@ -51,6 +52,10 @@ export function Footer() {
             CompRank est une solution indépendante, sans affiliation ni
             approbation de CrossFit, LLC ou HYROX World GmbH. CrossFit et HYROX
             sont des marques de leurs propriétaires respectifs.
+          </p>
+          <p className="text-base text-pretty text-gray-500 sm:text-sm">
+            Apple, le logo Apple et App Store sont des marques d’Apple Inc.,
+            déposées aux États-Unis et dans d’autres pays.
           </p>
           <p className="text-base text-gray-500 sm:text-sm">
             © {new Date().getFullYear()} CompRank. Tous droits réservés.

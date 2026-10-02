@@ -10,7 +10,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function Page() {
   return (
-    <main className="mx-auto mt-16 max-w-3xl rounded-lg p-6 text-white">
+    <main id="contenu" className="mx-auto mt-16 max-w-3xl rounded-lg p-6 text-white">
       <h1 className="text-3xl font-bold mb-6 text-primary-500">
         CONDITIONS GÉNÉRALES DE VENTE ET D&apos;UTILISATION
       </h1>

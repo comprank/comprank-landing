@@ -8,11 +8,12 @@ import {
   Timer,
 } from "lucide-react";
 import { CompetitionLanding } from "@/components/competition-landing";
+import { CompetitionDayOffer } from "@/components/day-of-event";
 import { createPageMetadata } from "@/lib/site";
 
 const title = "Logiciel pour compétition HYROX";
 const description =
-  "Gérez vagues, catégories, stations, temps intermédiaires et classement en direct pour vos simulations et compétitions au format HYROX.";
+  "Gérez Vagues, catégories, stations, temps intermédiaires et classement en direct, avec chronométrage RFID en option pour vos compétitions HYROX.";
 
 export const metadata: Metadata = createPageMetadata({
   title,
@@ -43,7 +44,7 @@ const features = [
     icon: Timer,
     title: "Temps intermédiaires",
     description:
-      "Enregistrez les splits à chaque station et suivez la progression des athlètes jusqu’à l’arrivée.",
+      "Centralisez les temps de course, de station et le temps total jusqu’à l’arrivée, qu’ils soient validés manuellement ou calculés par le chronométrage RFID.",
   },
   {
     icon: ListChecks,
@@ -71,9 +72,9 @@ const steps = [
       "Cadrez le parcours et les points de chronométrage pour que chaque split remonte au bon endroit.",
   },
   {
-    title: "Saisissez les temps intermédiaires",
+    title: "Validez les temps intermédiaires",
     description:
-      "Les équipes terrain enregistrent les passages depuis une interface mobile, sans application à installer.",
+      "Les passages détectés par le chronométrage RFID ou saisis dans CompRank alimentent le bon athlète, sans rapprochement après la course.",
   },
   {
     title: "Classez les athlètes à l’arrivée",
@@ -91,7 +92,7 @@ const faqs = [
   {
     question: "Peut-on suivre les temps station par station ?",
     answer:
-      "Oui. CompRank enregistre les temps intermédiaires à chaque station pour suivre la progression avant le temps final.",
+      "Oui. CompRank regroupe les temps de course, de station et le temps total. Avec la prestation de chronométrage RFID, les passages sont détectés automatiquement et les temps détaillés sont calculés à l’arrivée.",
   },
   {
     question: "Les règles peuvent-elles varier selon la catégorie ?",
@@ -106,7 +107,7 @@ const faqs = [
   {
     question: "Les équipes terrain doivent-elles installer une application ?",
     answer:
-      "Non. Les interfaces de saisie et de suivi fonctionnent dans le navigateur sur téléphone ou tablette.",
+      "Non. Aucune installation n’est obligatoire : les interfaces de saisie et de suivi restent accessibles dans le navigateur sur téléphone ou tablette.",
   },
 ];
 
@@ -140,10 +141,10 @@ export default function HyroxCompetitionPage() {
       steps={steps}
       faqTitle="Questions sur l’organisation d’une compétition HYROX"
       faqs={faqs}
+      dayOfEventOffer={<CompetitionDayOffer format="hyrox" />}
       relatedHref="/competition-crossfit"
       relatedLabel="Vous organisez aussi des compétitions CrossFit&nbsp;?"
       relatedDescription="Découvrez comment CompRank relie workouts, divisions, heats, scoring mobile et leaderboard en direct."
     />
   );
 }
-

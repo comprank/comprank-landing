@@ -8,11 +8,12 @@ import {
   Users,
 } from "lucide-react";
 import { CompetitionLanding } from "@/components/competition-landing";
+import { CompetitionDayOffer } from "@/components/day-of-event";
 import { createPageMetadata } from "@/lib/site";
 
 const title = "Logiciel pour compétition CrossFit";
 const description =
-  "Planifiez workouts, divisions et heats, saisissez les scores côté juges et publiez le classement en direct avec CompRank.";
+  "Planifiez Workouts, divisions et Vagues, équipez vos juges et publiez le classement en direct avec CompRank, avec Régie live en option.";
 
 export const metadata: Metadata = createPageMetadata({
   title,
@@ -96,7 +97,7 @@ const faqs = [
   {
     question: "Les juges peuvent-ils compter les reps et les no reps ?",
     answer:
-      "Oui. L’interface mobile de scoring permet aux juges de compter les reps, d’indiquer les no reps et de valider le score sans application à installer.",
+      "Oui. L’app CompRank permet aux juges de compter les reps, d’indiquer les no reps et de valider la Scorecard de leur Couloir. Aucune installation n’est obligatoire : l’interface web reste accessible.",
   },
   {
     question: "Le leaderboard peut-il rester privé ?",
@@ -140,10 +141,10 @@ export default function CrossFitCompetitionPage() {
       steps={steps}
       faqTitle="Questions sur l’organisation d’une compétition CrossFit"
       faqs={faqs}
+      dayOfEventOffer={<CompetitionDayOffer format="functional" />}
       relatedHref="/competition-hyrox"
       relatedLabel="Vous organisez aussi des compétitions au format HYROX&nbsp;?"
       relatedDescription="Découvrez la gestion des catégories, vagues de départ, stations et temps intermédiaires avec CompRank."
     />
   );
 }
-

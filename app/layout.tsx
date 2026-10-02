@@ -117,6 +117,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} flex min-h-svh flex-col antialiased`}
       >
         <JsonLd data={globalStructuredData} />
+        {/* Cible : l'id "contenu" posé sur le <main> de chaque page. */}
+        <a
+          href="#contenu"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-primary-500 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-dark-900"
+        >
+          Aller au contenu principal
+        </a>
         <Header />
         {children}
         <Footer />

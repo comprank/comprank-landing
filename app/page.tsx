@@ -17,10 +17,8 @@ import {
   BarChart3,
   Sparkles,
   Monitor,
-  Smartphone,
   Share2,
   Eye,
-  Wifi,
 } from "lucide-react";
 import {
   Accordion,
@@ -29,19 +27,19 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Hero } from "@/components/hero";
-import { LeadDialog } from "@/components/lead-dialog";
+import { AppJudgeSection } from "@/components/app-judge-section";
+import { DayOfEventSection } from "@/components/day-of-event";
+import { LeadButton } from "@/components/lead-button";
+import { AppLink } from "@/components/app-link";
 import { SmartPlannerDemo } from "@/components/smart-planner-demo";
-import { JudgeScoringMockup } from "@/components/judge-scoring-mockup";
 import { JsonLd } from "@/components/json-ld";
-import { createPageMetadata, SITE_URL } from "@/lib/site";
+import { createPageMetadata, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Logiciel de compétition CrossFit & HYROX",
-  description:
-    "Gérez inscriptions, planning, scoring mobile et classements en direct avec CompRank, le logiciel conçu pour les compétitions CrossFit et HYROX en France.",
+  description: SITE_DESCRIPTION,
   path: "/",
 });
 
@@ -69,9 +67,14 @@ const homepageFaqs = [
       "Oui, via import CSV ou envoi d’invitations avec des codes dédiés.",
   },
   {
-    question: "Proposez-vous une assistance le jour J ?",
+    question: "Faut-il internet pour utiliser la Régie live ?",
     answer:
-      "Nous proposons une assistance prioritaire par chat et email, ainsi que des guides de bonnes pratiques.",
+      "Non. Le comptage des juges, le Départ, le chrono partagé et la TV live fonctionnent sur le réseau local du Kit Régie. Si la connexion internet coupe, les scores finaux sont envoyés à CompRank dès son retour.",
+  },
+  {
+    question: "Comment fonctionne le chronométrage HYROX ?",
+    answer:
+      "CompRank installe les points de détection et équipe chaque athlète d’une puce RFID portée à la cheville. Les passages remontent automatiquement ; après l’arrivée, chaque athlète retrouve son temps total, le détail Course et Stations, et sa position dans sa division.",
   },
 ];
 
@@ -107,14 +110,14 @@ function PrimaryCategories() {
       label: "CrossFit",
       title: "Workouts, divisions, heats et scoring mobile",
       description:
-        "Préparez le déroulé, équipez vos juges et publiez un leaderboard actualisé à chaque score.",
+        "Pour une compétition CrossFit, CompRank gère les workouts, les divisions, les heats et le scoring mobile des juges. Préparez le déroulé, équipez vos juges et publiez un leaderboard actualisé à chaque score.",
     },
     {
       href: "/competition-hyrox",
       label: "HYROX",
       title: "Catégories, vagues, stations et temps intermédiaires",
       description:
-        "Suivez les départs et les splits station par station jusqu’au classement final.",
+        "Pour une compétition HYROX, CompRank gère les catégories, les vagues de départ, les stations et les temps intermédiaires. Suivez les départs et les splits station par station jusqu’au classement final, avec le chronométrage RFID en option.",
     },
   ];
 
@@ -129,7 +132,8 @@ function PrimaryCategories() {
             Une organisation pensée pour CrossFit et HYROX
           </h2>
           <p className="max-w-[48ch] text-lg text-pretty text-gray-400">
-            Chaque discipline dispose de son propre déroulé, tout en gardant
+            CompRank gère les compétitions CrossFit et HYROX : chaque
+            discipline dispose de son propre déroulé, tout en gardant
             inscriptions, terrain et résultats dans la même plateforme.
           </p>
         </div>
@@ -184,7 +188,7 @@ function LeaderboardSection() {
               </span>
             </h2>
             <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-              Chaque score validé par un juge met à jour instantanément le classement sur tous les écrans — téléphones, tablettes, écran géant.
+              Le classement CompRank se met à jour en temps réel : chaque score validé par un juge l’actualise instantanément sur tous les écrans — téléphones, tablettes, écran géant. Partagez-le par lien public ou réservez-le aux officiels.
             </p>
 
             <div className="grid grid-cols-3 gap-4">
@@ -270,7 +274,7 @@ function SmartPlannerSection() {
                 <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">avant le jour J</span>
               </h2>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Choisissez les workouts, les divisions, l&apos;heure de début et la capacité. Le Smart Planner prépare un brouillon que vous pouvez ajuster avant validation.
+                Avec le Smart Planner de CompRank, vos heats sont planifiés avant le jour J. Choisissez les workouts, les divisions, l&apos;heure de début et la capacité : le Smart Planner prépare un brouillon que vous pouvez ajuster avant validation.
               </p>
               <ul className="space-y-3">
                 {["Workouts et divisions dans l'ordre voulu", "Heures recalculées quand un heat bouge", "Brouillon gardé localement avant validation"].map((item, i) => (
@@ -287,41 +291,6 @@ function SmartPlannerSection() {
                 <SmartPlannerDemo />
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function JudgeScoringSection() {
-  return (
-    <section id="scoring" className="section bg-dark-900">
-      <div className="container-custom">
-        <div className={`text-center mb-12 ${anim}`}>
-          <h2 className="mb-4 text-4xl md:text-5xl font-bold">
-            Le scoring passe au{" "}
-            <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">mobile</span>
-          </h2>
-          <p className="mx-auto max-w-xl text-lg text-gray-400">
-            Les juges comptent les reps et valident les scores depuis leur téléphone. Plus de fiches papier.
-          </p>
-        </div>
-
-        <div className={`flex flex-col items-center gap-10 ${anim}`}>
-          <JudgeScoringMockup />
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl w-full">
-            {[
-              { icon: <Zap className="w-5 h-5" />, text: "Compteur rapide +/−" },
-              { icon: <CheckCircle className="w-5 h-5" />, text: "Validation en un tap" },
-              { icon: <Wifi className="w-5 h-5" />, text: "Aucune app à installer" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 p-4 rounded-xl bg-dark-800/60 border border-dark-600">
-                <div className="text-orange-400">{item.icon}</div>
-                <span className="text-sm text-gray-300">{item.text}</span>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -368,6 +337,10 @@ function OtherFeaturesGrid() {
       <div className="container-custom">
         <div className={`text-center mb-12 ${anim}`}>
           <h2 className="text-3xl md:text-4xl font-bold text-white">Tout pour vos compétitions</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-pretty text-gray-400">
+            CompRank réunit les inscriptions, le scoring, le feedback athlètes,
+            la liste d’attente et la planification dans un seul outil.
+          </p>
         </div>
         <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 ${anim}`}>
           {features.map((f, i) => (
@@ -403,6 +376,10 @@ function HowItWorksSection() {
             Comment{" "}
             <span className="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">ça marche</span>
           </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-pretty text-gray-400">
+            Avec CompRank, une compétition s’organise en six étapes, de la
+            création de l’événement à la publication du classement.
+          </p>
         </div>
 
         <div className={`relative max-w-5xl mx-auto ${anim}`}>
@@ -469,13 +446,17 @@ function BottomCTA() {
               à vos athlètes et spectateurs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <LeadDialog>
-                <Button size="lg" variant="outline">
-                  Démarrer gratuitement
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Button>
-              </LeadDialog>
+              <LeadButton
+                label="Démarrer gratuitement"
+                size="lg"
+                variant="outline"
+                showArrow
+              />
             </div>
+            <p className="mt-6 text-base text-gray-400 sm:text-sm">
+              Envie d’explorer par vous-même ?{" "}
+              <AppLink placement="bottom-cta" />
+            </p>
           </div>
         </Card>
       </div>
@@ -501,10 +482,12 @@ export default function Page() {
           "Logiciel de gestion de compétitions CrossFit et HYROX pour les organisateurs en France.",
         featureList: [
           "Gestion des inscriptions",
-          "Planification des vagues et des heats",
-          "Scoring mobile pour les juges",
+          "Planification des Vagues",
+          "Scorecards mobiles pour les juges",
           "Classements en direct",
           "Gestion des catégories et divisions",
+          "Régie live et TV live pour les compétitions FUNCTIONAL",
+          "Chronométrage RFID pour les compétitions HYROX",
         ],
         audience: {
           "@type": "Audience",
@@ -534,14 +517,15 @@ export default function Page() {
   };
 
   return (
-    <main className="isolate">
+    <main id="contenu" className="isolate">
       <JsonLd data={structuredData} />
       <Hero />
       <PrimaryCategories />
       <TrustBar />
       <LeaderboardSection />
       <SmartPlannerSection />
-      <JudgeScoringSection />
+      <AppJudgeSection />
+      <DayOfEventSection />
       <OtherFeaturesGrid />
       <HowItWorksSection />
       <FAQSection />
