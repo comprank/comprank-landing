@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { LeadButton } from "@/components/lead-button";
 import { AppLink } from "@/components/app-link";
+import { HeroVideo } from "@/components/hero-video";
 
 export interface Athlete {
   name: string;
@@ -141,6 +142,7 @@ export function Hero() {
         </motion.div>
       </div>
 
+      <HeroVideo />
     </section>
   );
 }
