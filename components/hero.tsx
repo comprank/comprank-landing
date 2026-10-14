@@ -131,14 +131,6 @@ export function Hero() {
             <AppLink placement="hero" />
           </motion.p>
 
-          <div className="mx-auto mt-10 max-w-2xl rounded-xl border border-white/10 bg-dark-800 p-6 text-left">
-            <p className="text-sm font-medium text-primary-400">Exemple pédagogique · préparer les inscriptions</p>
-            <ol className="mt-4 space-y-3 text-sm text-gray-300">
-              <li>1. Définissez vos divisions et leurs places disponibles.</li>
-              <li>2. Regroupez les inscriptions individuelles ou par équipe.</li>
-              <li>3. Préparez le planning à partir des participants inscrits.</li>
-            </ol>
-          </div>
         </motion.div>
       </div>
 
