@@ -1,0 +1,2 @@
+﻿"Type de modèle";"Bloc (ordre)";"Division";"Workout";"Participants ou équipes (nombre)";"Couloirs (nombre)";"Durée heat (min)";"Transition entre heats uniquement (min)";"Pause avant bloc (min)";"Heure départ planning (HH:MM)";"Note"
+"Exemple illustratif sans données client";"1";"Exemple équipes";"Workout 1";"20";"6";"12";"3";"0";"09:00";"Trame modifiable sans formules. Reporter les valeurs dans le calculateur pour recalculer. Pas d’import CSV."

@@ -1,19 +1,15 @@
 "use client";
 
 import {
-  Star,
   TrendingUp,
   TrendingDown,
   Minus,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { LeadButton } from "@/components/lead-button";
 import { AppLink } from "@/components/app-link";
-import { HeroVideo } from "@/components/hero-video";
-import { StoreBadges } from "@/components/store-badges";
 
 export interface Athlete {
   name: string;
@@ -91,7 +87,7 @@ export function Hero() {
             custom={0}
             className="font-mono text-base uppercase tracking-wide text-primary-400 sm:text-sm"
           >
-            Lâchez les tableurs. Scorez en direct.
+            Commencez par les inscriptions.
           </motion.p>
           <motion.h1
             variants={fadeUp}
@@ -106,9 +102,7 @@ export function Hero() {
             custom={2}
             className="mx-auto mt-6 max-w-2xl text-lg text-pretty text-gray-300"
           >
-            Gérez inscriptions, planning, scoring mobile et classements en
-            direct depuis un seul outil, conçu pour les organisateurs en
-            France.
+            Ouvrez les inscriptions de votre compétition et suivez vos équipes dans CompRank. Préparez ensuite les heats, le scoring et les résultats depuis le même outil.
           </motion.p>
 
           <motion.div
@@ -117,7 +111,7 @@ export function Hero() {
             className="mt-8 flex flex-col justify-center gap-3 sm:flex-row"
           >
             <LeadButton
-              label="Démarrer gratuitement"
+              label="Préparer mes inscriptions"
               size="lg"
               showArrow
             />
@@ -131,49 +125,22 @@ export function Hero() {
             custom={3}
             className="mt-4 text-base text-gray-400 sm:text-sm"
           >
-            Envie d’explorer par vous-même ?{" "}
+            Le module d’inscription est sans coût pour l’organisateur.
+            <br />Envie d’explorer par vous-même ?{" "}
             <AppLink placement="hero" />
           </motion.p>
 
-          <motion.div
-            variants={fadeUp}
-            custom={4}
-            className="mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8"
-          >
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map((id) => (
-                  <Image
-                    width={36}
-                    height={36}
-                    key={id}
-                    src={`/box/box-${id}.webp`}
-                    alt=""
-                    loading="eager"
-                    className="size-9 rounded-full object-cover outline outline-2 outline-dark-600"
-                  />
-                ))}
-              </div>
-              <div>
-                <div className="flex">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star
-                      key={s}
-                      className="size-3.5 text-primary-500 fill-primary-500"
-                    />
-                  ))}
-                </div>
-                <p className="text-base text-gray-400 sm:text-sm">
-                  50+ salles en France
-                </p>
-              </div>
-            </div>
-            <StoreBadges className="justify-center" />
-          </motion.div>
+          <div className="mx-auto mt-10 max-w-2xl rounded-xl border border-white/10 bg-dark-800 p-6 text-left">
+            <p className="text-sm font-medium text-primary-400">Exemple pédagogique · préparer les inscriptions</p>
+            <ol className="mt-4 space-y-3 text-sm text-gray-300">
+              <li>1. Définissez vos divisions et leurs places disponibles.</li>
+              <li>2. Regroupez les inscriptions individuelles ou par équipe.</li>
+              <li>3. Préparez le planning à partir des participants inscrits.</li>
+            </ol>
+          </div>
         </motion.div>
       </div>
 
-      <HeroVideo />
     </section>
   );
 }

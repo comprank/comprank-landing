@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button";
 const navigation = [
   { href: "/competition-crossfit", label: "CrossFit" },
   { href: "/competition-hyrox", label: "HYROX" },
+  { href: "/competition-backyard", label: "Backyard" },
+  { href: "/guides/planning-heats-competition-crossfit", label: "Guide heats" },
   { href: "/#offre", label: "Le jour J" },
   { href: "/#features", label: "Fonctionnalités" },
   { href: "/#faq", label: "FAQ" },
@@ -41,7 +43,7 @@ export const Header = () => {
 
         <nav
           aria-label="Navigation principale"
-          className="hidden items-center gap-7 lg:flex"
+          className="hidden items-center gap-5 xl:flex"
         >
           {navigation.map((item) => (
             <Link
@@ -65,7 +67,7 @@ export const Header = () => {
             <CTA label="Démarrer" onClick={openLead} />
           </div>
 
-          <div className="relative lg:hidden">
+          <div className="relative xl:hidden">
             <Button
               type="button"
               variant="ghost"
@@ -88,7 +90,7 @@ export const Header = () => {
             {isMobileMenuOpen ? (
               <div
                 id="mobile-navigation"
-                className="absolute right-0 top-12 w-64 rounded-xl bg-dark-700 p-3 shadow-2xl ring-1 ring-white/10"
+                className="absolute right-0 top-12 max-h-[calc(100dvh-5rem)] w-64 max-w-[calc(100vw-2rem)] overflow-y-auto rounded-xl bg-dark-700 p-3 shadow-2xl ring-1 ring-white/10"
               >
                 <nav
                   aria-label="Navigation mobile"
@@ -106,7 +108,7 @@ export const Header = () => {
                   ))}
                   <div className="mt-2 flex flex-col gap-1 border-t border-white/10 pt-3 sm:hidden">
                     <CTA
-                      label="Démarrer gratuitement"
+                      label="Préparer mes inscriptions"
                       onClick={() => {
                         closeMobileMenu();
                         openLead();

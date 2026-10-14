@@ -139,6 +139,10 @@ export function CompetitionLanding({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,173,74,0.12),transparent_36%)]" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[11fr_9fr] lg:px-8">
           <div className="flex min-w-0 flex-col items-start gap-6">
+            <nav aria-label="Fil d’Ariane" className="text-sm text-gray-400">
+              <Link href="/" className="hover:text-white">Accueil</Link>
+              <span aria-hidden="true"> / </span><span>{eyebrow}</span>
+            </nav>
             <Badge variant="outline">{eyebrow}</Badge>
             <h1 className="max-w-[24ch] text-4xl font-semibold tracking-tight text-balance text-white md:text-5xl lg:text-6xl">
               {title}
@@ -193,7 +197,7 @@ export function CompetitionLanding({
               ))}
             </dl>
             <div className="border-t border-white/10 pt-5">
-              <Badge variant="secondary">Données synchronisées en direct</Badge>
+              <Badge variant="secondary" className="whitespace-normal">Exemple pédagogique · pas un événement réel</Badge>
             </div>
           </div>
         </div>
@@ -237,7 +241,6 @@ export function CompetitionLanding({
 
       {customerStory}
 
-      {dayOfEventOffer}
 
       <section className="bg-dark-900 py-16 sm:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[2fr_3fr] lg:px-8">
@@ -272,6 +275,8 @@ export function CompetitionLanding({
           </ol>
         </div>
       </section>
+
+      {dayOfEventOffer}
 
       <section className="bg-dark-800 py-16 sm:py-24">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[2fr_3fr] lg:px-8">
@@ -318,14 +323,14 @@ export function CompetitionLanding({
 
           <div className="flex flex-col items-start gap-5">
             <h2 className="max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white md:text-4xl">
-              Prêt à remplacer les tableurs le jour J&nbsp;?
+              Prêt à ouvrir vos inscriptions&nbsp;?
             </h2>
             <p className="max-w-[48ch] text-lg text-pretty text-gray-400">
               Créez votre événement et centralisez toute l’organisation dans
               CompRank.
             </p>
             <LeadButton
-              label="Démarrer gratuitement"
+              label="Préparer mes inscriptions"
               size="lg"
               variant="outline"
             />
