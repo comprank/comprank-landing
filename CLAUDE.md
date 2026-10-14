@@ -164,6 +164,13 @@ public/             # Static assets
 └── box/            # Box logo images
 ```
 
+## Approved registration case study
+
+- `components/remes-classics-case-study.tsx` renders the approved REMES CLASSICS 2026 case on the homepage after the feature grid and on the CrossFit landing through the optional `customerStory` slot. HYROX does not inherit it.
+- Facts approved by Nicolas: 60 athletes, 20 teams of three, all teams registered on CompRank, previously Excel. Feedback is paraphrased and attributed to the CompRank team; no quotation, ratings, quantified gains or on-site service claim. No client image/logo used.
+- The event link is secondary proof, not an athlete-registration CTA. No tracking or SEO metadata changes.
+- Regression test against a running server: `node --test tests/remes-classics.test.mjs` (default localhost:3123, override with `TEST_BASE_URL`).
+
 ## Development Notes
 
 - The site uses React Compiler (feature enabled in Next.js config)

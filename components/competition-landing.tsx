@@ -54,6 +54,7 @@ type CompetitionLandingProps = {
   relatedLabel: string;
   relatedDescription: string;
   dayOfEventOffer?: ReactNode;
+  customerStory?: ReactNode;
 };
 
 export function CompetitionLanding({
@@ -79,6 +80,7 @@ export function CompetitionLanding({
   relatedLabel,
   relatedDescription,
   dayOfEventOffer,
+  customerStory,
 }: CompetitionLandingProps) {
   const pageUrl = `${SITE_URL}${path}`;
   const structuredData = {
@@ -232,6 +234,8 @@ export function CompetitionLanding({
           </dl>
         </div>
       </section>
+
+      {customerStory}
 
       {dayOfEventOffer}
 

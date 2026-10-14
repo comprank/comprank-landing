@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { RemesClassicsCaseStudy } from "@/components/remes-classics-case-study";
 import {
   CalendarClock,
   Dumbbell,
@@ -115,6 +116,7 @@ export default function CrossFitCompetitionPage() {
   return (
     <CompetitionLanding
       path="/competition-crossfit"
+      customerStory={<RemesClassicsCaseStudy />}
       eyebrow="Logiciel compétition CrossFit"
       title="Organisez votre compétition CrossFit sans tableurs"
       description="Pilotez les inscriptions, workouts, divisions, heats, juges et classements depuis une plateforme conçue pour le jour J."

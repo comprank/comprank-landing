@@ -33,6 +33,7 @@ import { AppJudgeSection } from "@/components/app-judge-section";
 import { DayOfEventSection } from "@/components/day-of-event";
 import { LeadButton } from "@/components/lead-button";
 import { AppLink } from "@/components/app-link";
+import { RemesClassicsCaseStudy } from "@/components/remes-classics-case-study";
 import { SmartPlannerDemo } from "@/components/smart-planner-demo";
 import { JsonLd } from "@/components/json-ld";
 import { createPageMetadata, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
@@ -527,6 +528,7 @@ export default function Page() {
       <AppJudgeSection />
       <DayOfEventSection />
       <OtherFeaturesGrid />
+      <RemesClassicsCaseStudy />
       <HowItWorksSection />
       <FAQSection />
       <BottomCTA />
