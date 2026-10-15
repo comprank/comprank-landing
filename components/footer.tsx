@@ -4,6 +4,8 @@ import Link from "next/link";
 const footerLinks = [
   { href: "/competition-crossfit", label: "Logiciel compétition CrossFit" },
   { href: "/competition-hyrox", label: "Logiciel compétition HYROX" },
+  { href: "/competition-backyard", label: "Logiciel organisation Backyard" },
+  { href: "/guides/planning-heats-competition-crossfit", label: "Guide : planning des heats" },
   { href: "/#offre", label: "Le jour J" },
   { href: "/#features", label: "Fonctionnalités" },
   { href: "/#faq", label: "Questions fréquentes" },
@@ -26,8 +28,8 @@ export function Footer() {
               />
             </Link>
             <p className="max-w-[48ch] text-base text-pretty text-gray-400 sm:text-sm">
-              La plateforme française pour planifier, scorer et publier les
-              résultats de vos compétitions de fitness.
+              Le logiciel pour gérer les inscriptions de vos compétitions,
+              préparer le planning et publier les résultats.
             </p>
           </div>
 

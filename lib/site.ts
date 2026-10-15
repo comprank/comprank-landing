@@ -11,7 +11,7 @@ export const ANDROID_APP_URL =
   "https://play.google.com/store/apps/details?id=com.comprank.comprank";
 
 export const SITE_DESCRIPTION =
-  "Gérez inscriptions, planning, Scorecards et classements avec CompRank, plus Régie live et chrono RFID pour vos compétitions CrossFit et HYROX.";
+  "Gérez les inscriptions de vos compétitions CrossFit, HYROX et Backyard avec CompRank, puis préparez le planning et les résultats. Services terrain en option.";
 
 type PageMetadata = {
   title: string;
