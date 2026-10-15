@@ -183,6 +183,10 @@ public/             # Static assets
 - HTTP regression tests (running server at port 3123): `node --test tests/seo-content.test.mjs tests/remes-classics.test.mjs`. Override `TEST_BASE_URL` as needed. Start dev with `/opt/data/bin/bun run dev --port 3123`. The content suite checks routes, qualified cost wording, canonicals, breadcrumbs, guide example, calculator inputs and discovery links.
 - Checks: `node_modules/.bin/eslint .` and `/opt/data/bin/bun run build`. Baseline lint has two warnings (TanStack table / anonymous Tailwind export). Planner tests and downloadable artifacts have separate owners during parallel work; do not overwrite their files.
 
+## Hover navigation
+
+- Desktop Compétitions opens on mouse hover, with a 180ms exit delay to cross the panel gap. Touch/mobile and keyboard activation remain available. Focus inside the panel prevents pointer exit from dismissing keyboard navigation.
+
 ## Development Notes
 
 - The site uses React Compiler (feature enabled in Next.js config)

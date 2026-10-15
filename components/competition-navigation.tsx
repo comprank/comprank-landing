@@ -21,6 +21,7 @@ export function CompetitionNavigation({ pathname, mobile = false, onNavigate }: 
   const active = competitions.some((item) => item.href === pathname);
   return (
     <NavigationDisclosure
+      hover={!mobile}
       open={open}
       onOpenChange={setOpen}
       className="relative"

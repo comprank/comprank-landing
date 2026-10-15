@@ -4,8 +4,9 @@ import { useEffect, useId, useRef, type ReactNode } from "react";
 
 /** Inline disclosure: unlike a portaled menu, closed links remain in server HTML. */
 export function NavigationDisclosure({
-  open, onOpenChange, label, children, className, triggerClassName, panelClassName,
+  open, onOpenChange, label, children, className, triggerClassName, panelClassName, hover = false,
 }: {
+  hover?: boolean;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   label: ReactNode;
@@ -17,6 +18,9 @@ export function NavigationDisclosure({
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancelClose = () => { if (closeTimer.current) clearTimeout(closeTimer.current); };
+  useEffect(() => () => { if (closeTimer.current) clearTimeout(closeTimer.current); }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -39,6 +43,18 @@ export function NavigationDisclosure({
     <div
       ref={root}
       className={className}
+      onPointerEnter={(event) => {
+        if (!hover || event.pointerType !== "mouse") return;
+        cancelClose();
+        onOpenChange(true);
+      }}
+      onPointerLeave={(event) => {
+        if (!hover || event.pointerType !== "mouse") return;
+        cancelClose();
+        closeTimer.current = setTimeout(() => {
+          if (!root.current?.contains(document.activeElement)) onOpenChange(false);
+        }, 180);
+      }}
       onKeyDown={(event) => {
         if (event.key === "Escape" && open) {
           event.preventDefault();
