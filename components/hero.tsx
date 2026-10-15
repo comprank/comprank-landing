@@ -83,13 +83,6 @@ export function Hero() {
           animate="visible"
           className="mx-auto max-w-4xl text-center"
         >
-          <motion.p
-            variants={fadeUp}
-            custom={0}
-            className="font-mono text-base uppercase tracking-wide text-primary-400 sm:text-sm"
-          >
-            Commencez par les inscriptions.
-          </motion.p>
           <motion.h1
             variants={fadeUp}
             custom={1}

@@ -189,6 +189,8 @@ public/             # Static assets
 
 ## Development Notes
 
+- Hero eyebrow “Commencez par les inscriptions.” removed at Nicolas's request; retain H1, description, CTAs and HeroVideo.
+
 - The site uses React Compiler (feature enabled in Next.js config)
 - Uses Bun as package manager (bun.lockb present)
 - No custom CSS files beyond globals.css - everything styled with Tailwind
