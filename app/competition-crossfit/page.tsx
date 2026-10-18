@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { RemesClassicsCaseStudy } from "@/components/remes-classics-case-study";
 import {
   CalendarClock,
   Dumbbell,
@@ -13,7 +14,7 @@ import { createPageMetadata } from "@/lib/site";
 
 const title = "Logiciel pour compétition CrossFit";
 const description =
-  "Planifiez Workouts, divisions et Vagues, équipez vos juges et publiez le classement en direct avec CompRank, avec Régie live en option.";
+  "Gérez les inscriptions de votre compétition CrossFit, puis les divisions, heats et résultats avec CompRank. Module d’inscription sans coût pour l’organisateur.";
 
 export const metadata: Metadata = createPageMetadata({
   title,
@@ -23,16 +24,16 @@ export const metadata: Metadata = createPageMetadata({
 
 const features = [
   {
+    icon: Users,
+    title: "Inscriptions, équipes et divisions",
+    description:
+      "Centralisez les inscriptions, les catégories, les équipes et les listes d’attente sans multiplier les fichiers.",
+  },
+  {
     icon: Dumbbell,
     title: "Workouts et barèmes flexibles",
     description:
       "Configurez les épreuves, les formats de score et les règles de classement adaptées à votre compétition.",
-  },
-  {
-    icon: Users,
-    title: "Divisions, équipes et athlètes",
-    description:
-      "Centralisez les inscriptions, les catégories, les équipes et les listes d’attente sans multiplier les fichiers.",
   },
   {
     icon: CalendarClock,
@@ -62,9 +63,9 @@ const features = [
 
 const steps = [
   {
-    title: "Configurez les workouts et les divisions",
+    title: "Ouvrez les inscriptions par division",
     description:
-      "Définissez vos épreuves, catégories, formats de score et capacité de lanes.",
+      "Créez vos catégories et leur capacité, puis centralisez les inscriptions individuelles ou par équipe.",
   },
   {
     title: "Préparez le planning et les heats",
@@ -115,12 +116,13 @@ export default function CrossFitCompetitionPage() {
   return (
     <CompetitionLanding
       path="/competition-crossfit"
+      customerStory={<RemesClassicsCaseStudy />}
       eyebrow="Logiciel compétition CrossFit"
       title="Organisez votre compétition CrossFit sans tableurs"
-      description="Pilotez les inscriptions, workouts, divisions, heats, juges et classements depuis une plateforme conçue pour le jour J."
+      description="Ouvrez vos inscriptions individuelles ou par équipe, suivez les divisions et les places disponibles. Préparez ensuite vos workouts, heats et classements."
       primaryCta="Créer ma compétition"
       heroPoints={[
-        "Smart Planner ajustable avant publication",
+        "Le module d’inscription est sans coût pour l’organisateur.",
         "Scoring reps et no reps sur mobile",
         "Leaderboard actualisé à chaque score validé",
       ]}
@@ -132,8 +134,8 @@ export default function CrossFitCompetitionPage() {
         { label: "Scoring", value: "Juges sur mobile" },
         { label: "Classement", value: "Public ou privé" },
       ]}
-      featuresEyebrow="Du WOD au podium"
-      featuresTitle="Construisez workouts, divisions et heats dans un seul espace"
+      featuresEyebrow="Des inscriptions au podium"
+      featuresTitle="Rassemblez les inscriptions avant de construire les heats"
       featuresDescription="CompRank relie la préparation, le terrain et la publication des résultats pour supprimer les doubles saisies."
       features={features}
       workflowTitle="Un workflow qui suit vraiment votre compétition"
@@ -142,9 +144,9 @@ export default function CrossFitCompetitionPage() {
       faqTitle="Questions sur l’organisation d’une compétition CrossFit"
       faqs={faqs}
       dayOfEventOffer={<CompetitionDayOffer format="functional" />}
-      relatedHref="/competition-hyrox"
-      relatedLabel="Vous organisez aussi des compétitions au format HYROX&nbsp;?"
-      relatedDescription="Découvrez la gestion des catégories, vagues de départ, stations et temps intermédiaires avec CompRank."
+      relatedHref="/guides/planning-heats-competition-crossfit"
+      relatedLabel="Préparer un planning de heats qui tient sur le terrain"
+      relatedDescription="Calculez les vagues et les transitions avec notre guide, son exemple détaillé et son modèle CSV."
     />
   );
 }

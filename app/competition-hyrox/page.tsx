@@ -13,7 +13,7 @@ import { createPageMetadata } from "@/lib/site";
 
 const title = "Logiciel pour compétition HYROX";
 const description =
-  "Gérez Vagues, catégories, stations, temps intermédiaires et classement en direct, avec chronométrage RFID en option pour vos compétitions HYROX.";
+  "Centralisez les inscriptions de votre compétition HYROX, puis préparez catégories, vagues de départ et résultats. Chronométrage RFID en option.";
 
 export const metadata: Metadata = createPageMetadata({
   title,
@@ -24,9 +24,9 @@ export const metadata: Metadata = createPageMetadata({
 const features = [
   {
     icon: Layers3,
-    title: "Catégories bien cadrées",
+    title: "Inscriptions et catégories",
     description:
-      "Configurez les formats individuels ou en équipe et appliquez les règles propres à chaque catégorie.",
+      "Regroupez vos inscriptions, configurez les formats individuels ou en équipe et préparez les catégories.",
   },
   {
     icon: Flag,
@@ -62,9 +62,9 @@ const features = [
 
 const steps = [
   {
-    title: "Créez les catégories et les vagues",
+    title: "Ouvrez les inscriptions",
     description:
-      "Définissez vos formats, répartissez les participants et préparez les horaires de départ.",
+      "Définissez vos catégories et leurs capacités, recueillez les inscriptions, puis préparez les vagues de départ.",
   },
   {
     title: "Structurez les stations",
@@ -117,10 +117,10 @@ export default function HyroxCompetitionPage() {
       path="/competition-hyrox"
       eyebrow="Logiciel compétition HYROX"
       title="Pilotez votre compétition HYROX, vague après vague"
-      description="Gérez catégories, départs, stations, temps intermédiaires et classements sans disperser l’organisation entre plusieurs outils."
+      description="Centralisez vos inscriptions et vos catégories dans CompRank. Répartissez ensuite les participants par vague et suivez les temps jusqu’au classement."
       primaryCta="Créer mon événement"
       heroPoints={[
-        "Catégories et vagues de départ structurées",
+        "Le module d’inscription est sans coût pour l’organisateur.",
         "Temps intermédiaires suivis station par station",
         "Classement actualisé dès validation des temps",
       ]}
@@ -133,7 +133,7 @@ export default function HyroxCompetitionPage() {
         { label: "Résultats", value: "Par catégorie" },
       ]}
       featuresEyebrow="De la vague à l’arrivée"
-      featuresTitle="Cadrez les départs et suivez chaque station"
+      featuresTitle="Des participants inscrits aux vagues de départ"
       featuresDescription="CompRank donne aux organisateurs une vue continue du parcours, des premiers départs jusqu’au classement final."
       features={features}
       workflowTitle="Un suivi continu pendant toute la course"

@@ -33,6 +33,7 @@ import { AppJudgeSection } from "@/components/app-judge-section";
 import { DayOfEventSection } from "@/components/day-of-event";
 import { LeadButton } from "@/components/lead-button";
 import { AppLink } from "@/components/app-link";
+import { RemesClassicsCaseStudy } from "@/components/remes-classics-case-study";
 import { SmartPlannerDemo } from "@/components/smart-planner-demo";
 import { JsonLd } from "@/components/json-ld";
 import { createPageMetadata, SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
@@ -46,6 +47,10 @@ export const metadata: Metadata = createPageMetadata({
 const anim = "opacity-100 translate-y-0";
 
 const homepageFaqs = [
+  {
+    question: "Quel est le coût du module d’inscription pour l’organisateur ?",
+    answer: "Le module d’inscription est sans coût pour l’organisateur. Cette indication porte sur ce module, pas sur l’ensemble des prestations. Elle ne signifie pas que les athlètes ne paient aucun frais.",
+  },
   {
     question: "Le classement s’actualise-t-il automatiquement ?",
     answer:
@@ -108,16 +113,22 @@ function PrimaryCategories() {
     {
       href: "/competition-crossfit",
       label: "CrossFit",
-      title: "Workouts, divisions, heats et scoring mobile",
+      title: "Inscriptions par équipe, divisions et heats",
       description:
-        "Pour une compétition CrossFit, CompRank gère les workouts, les divisions, les heats et le scoring mobile des juges. Préparez le déroulé, équipez vos juges et publiez un leaderboard actualisé à chaque score.",
+        "Ouvrez les inscriptions individuelles ou par équipe et suivez les divisions. Préparez ensuite les workouts, les heats et le scoring mobile des juges jusqu’au classement.",
     },
     {
       href: "/competition-hyrox",
       label: "HYROX",
-      title: "Catégories, vagues, stations et temps intermédiaires",
+      title: "Inscriptions, catégories et vagues de départ",
       description:
-        "Pour une compétition HYROX, CompRank gère les catégories, les vagues de départ, les stations et les temps intermédiaires. Suivez les départs et les splits station par station jusqu’au classement final, avec le chronométrage RFID en option.",
+        "Regroupez vos inscriptions par catégorie, puis répartissez les participants en vagues de départ. Suivez les stations et les temps jusqu’au classement. Le chronométrage RFID est une option distincte.",
+    },
+    {
+      href: "/competition-backyard",
+      label: "Backyard",
+      title: "Inscriptions et suivi des boucles",
+      description: "Préparez votre liste de participants, suivez les départs et les passages, puis les abandons, hors délai et résultats. Utilisez la saisie manuelle ou le RFID, avec un fonctionnement hors ligne.",
     },
   ];
 
@@ -126,19 +137,19 @@ function PrimaryCategories() {
       <div className="container-custom">
         <div className="flex flex-col items-start gap-4">
           <p className="font-mono text-base uppercase tracking-wide text-primary-400 sm:text-sm">
-            Deux formats, un même outil
+            Choisissez votre format
           </p>
           <h2 className="max-w-[35ch] text-3xl font-semibold tracking-tight text-balance text-white md:text-4xl">
-            Une organisation pensée pour CrossFit et HYROX
+            Des inscriptions au suivi de votre compétition
           </h2>
           <p className="max-w-[48ch] text-lg text-pretty text-gray-400">
-            CompRank gère les compétitions CrossFit et HYROX : chaque
+            CompRank gère les compétitions CrossFit, HYROX et Backyard : chaque
             discipline dispose de son propre déroulé, tout en gardant
             inscriptions, terrain et résultats dans la même plateforme.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {categories.map((category) => (
             <Link
               key={category.href}
@@ -212,11 +223,11 @@ function LeaderboardSection() {
               <div className="flex items-center justify-between px-5 py-3 border-b border-dark-500 bg-dark-700/50">
                 <div className="flex items-center gap-2">
                   <Trophy className="w-5 h-5 text-primary-500" />
-                  <span className="text-sm font-semibold text-white">Classement général</span>
+                  <span className="text-sm font-semibold text-white">Exemple pédagogique de classement</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 border border-green-500/20">
                   <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-xs font-medium text-green-400">Live</span>
+                  <span className="text-xs font-medium text-green-400">Fictif</span>
                 </div>
               </div>
               <div className="divide-y divide-dark-600/50">
@@ -251,7 +262,7 @@ function LeaderboardSection() {
               <div className="bg-dark-700/50 border-t border-dark-600 p-3 text-center">
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-xs text-gray-400">Actualisation en continu</span>
+                  <span className="text-xs text-gray-400">Données fictives · aucun résultat client</span>
                 </div>
               </div>
             </Card>
@@ -288,7 +299,9 @@ function SmartPlannerSection() {
 
             <div className="lg:w-2/3">
               <div className="rounded-lg bg-dark-700/50 p-4 ring-1 ring-dark-600 md:p-5">
+                <p className="mb-4 text-sm text-primary-400">Démonstration pédagogique · données fictives</p>
                 <SmartPlannerDemo />
+                <Link href="/guides/planning-heats-competition-crossfit" className="mt-5 inline-block text-primary-400 underline underline-offset-4">Calculer vos heats et télécharger le modèle CSV</Link>
               </div>
             </div>
           </div>
@@ -336,10 +349,10 @@ function OtherFeaturesGrid() {
     <section id="features" className="section bg-dark-800">
       <div className="container-custom">
         <div className={`text-center mb-12 ${anim}`}>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Tout pour vos compétitions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Commencez par regrouper vos inscriptions</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-pretty text-gray-400">
-            CompRank réunit les inscriptions, le scoring, le feedback athlètes,
-            la liste d’attente et la planification dans un seul outil.
+            Définissez vos divisions, leurs capacités et vos équipes. Suivez les places
+            et la liste d’attente, puis préparez le planning à partir de vos inscrits.
           </p>
         </div>
         <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 ${anim}`}>
@@ -442,12 +455,12 @@ function BottomCTA() {
               </span>
             </h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-300 mb-8">
-              Lancez votre événement en quelques minutes et offrez une expérience premium
-              à vos athlètes et spectateurs.
+              Commencez par les inscriptions, puis préparez le déroulé avec votre équipe.
+              Le module d’inscription est sans coût pour l’organisateur.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <LeadButton
-                label="Démarrer gratuitement"
+                label="Préparer mes inscriptions"
                 size="lg"
                 variant="outline"
                 showArrow
@@ -479,15 +492,14 @@ export default function Page() {
         browserRequirements: "Requires a modern web browser",
         inLanguage: "fr-FR",
         description:
-          "Logiciel de gestion de compétitions CrossFit et HYROX pour les organisateurs en France.",
+          "Logiciel de gestion des inscriptions, du planning et des résultats pour les organisateurs de compétitions CrossFit, HYROX et Backyard.",
         featureList: [
           "Gestion des inscriptions",
           "Planification des Vagues",
           "Scorecards mobiles pour les juges",
           "Classements en direct",
           "Gestion des catégories et divisions",
-          "Régie live et TV live pour les compétitions FUNCTIONAL",
-          "Chronométrage RFID pour les compétitions HYROX",
+          "Suivi des boucles, abandons et résultats Backyard",
         ],
         audience: {
           "@type": "Audience",
@@ -520,13 +532,14 @@ export default function Page() {
     <main id="contenu" className="isolate">
       <JsonLd data={structuredData} />
       <Hero />
+      <OtherFeaturesGrid />
+      <RemesClassicsCaseStudy />
       <PrimaryCategories />
       <TrustBar />
       <LeaderboardSection />
       <SmartPlannerSection />
       <AppJudgeSection />
       <DayOfEventSection />
-      <OtherFeaturesGrid />
       <HowItWorksSection />
       <FAQSection />
       <BottomCTA />

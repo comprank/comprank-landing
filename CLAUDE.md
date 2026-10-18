@@ -113,7 +113,7 @@ The homepage has been fully redesigned with:
 
 ### App, Scorecard and On-site Services (issue #14)
 
-The homepage now follows three narratives while preserving the existing hero, five-feature grid and six-step flow: App juge + Scorecard, Régie live + TV live, and RFID timing for HYROX. The latter two are explicitly separate on-site services; the software remains free for organizers.
+Historical issue #14 introduced App juge + Scorecard, Régie live + TV live, and RFID timing for HYROX. The organizer-first section below supersedes that homepage ordering. The latter two remain separate optional on-site services; only the registration module is described as without cost to the organizer.
 
 - **`components/phone-shell.tsx`** — reusable phone chassis (extracted from `JudgeScoringMockup`), takes any screen as children.
 - **`components/phone-screens.tsx`** — screens sized for `PhoneShell`. `PhoneJudgeOfflineScreen` is rendered as decorative proof in the App juge section; `PhoneLeaderboardScreen` remains available but is not rendered.
@@ -164,7 +164,32 @@ public/             # Static assets
 └── box/            # Box logo images
 ```
 
+## Approved registration case study
+
+- `components/remes-classics-case-study.tsx` renders the approved REMES CLASSICS 2026 case on the homepage after the feature grid and on the CrossFit landing through the optional `customerStory` slot. HYROX does not inherit it.
+- Facts approved by Nicolas: 60 athletes, 20 teams of three, all teams registered on CompRank, previously Excel. Feedback is paraphrased and attributed to the CompRank team; no quotation, ratings, quantified gains or on-site service claim. No client image/logo used.
+- The event link is secondary proof, not an athlete-registration CTA. No tracking or SEO metadata changes.
+- Regression test against a running server: `node --test tests/remes-classics.test.mjs` (default localhost:3123, override with `TEST_BASE_URL`).
+
+## Organizer-first content and heats guide
+
+- Homepage and CrossFit/HYROX landings lead with registrations, then planning and results. The homepage renders the feature grid and approved REMES case before format and terrain sections. Lead dialogs and existing tracking implementations are unchanged.
+- Approved cost wording: **Le module d’inscription est sans coût pour l’organisateur.** Do not broaden this to all software/services, claim athletes pay no fees, or invent a payer or fee amount. Terrain services are separate, optional and on request; no TV customer proof or reliability guarantee may be invented.
+- `/competition-backyard` covers approved registration, lap starts/passages, retirements/timeouts, results, RFID/manual and offline functionality. Do not add automatic elimination rules, universal format compatibility or official affiliation/certification.
+- `/guides/planning-heats-competition-crossfit` includes an operational method, a labelled illustrative table, `HeatsPlanner` from `components/heats-planner.tsx`, and `/downloads/modele-planning-heats.csv`. No XLSX download is promised. Defaults: 20 teams, 6 lanes, 12-minute cap, 3-minute transition, 09:00 start, zero pause before the first block. Four heats end at 09:57 (57 minutes), with 2 teams in the last heat. There is no trailing transition. Blocks run sequentially; pauses before blocks are separate from within-block transitions. Rest, judges, shared equipment and multiple areas need organizer review.
+- New pages use self canonicals, visible and JSON-LD breadcrumbs, sitemap entries, llms.txt summaries and header/footer crosslinks. Existing canonicals remain unchanged. Mobile navigation stays active below `xl` and scrolls within the viewport.
+- No unapproved customer photos/logos or invented testimonials. The original `HeroVideo` is retained; the introductory registration example banner was removed at Nicolas's request. Do not remove existing visual assets as part of SEO copy changes without explicit approval. Terrain panels use text rather than mock result screens. Existing illustrative leaderboard/planner displays are labelled as fictitious; the REMES case remains factual.
+- Header groups CrossFit, HYROX and Backyard in `CompetitionNavigation`, using one data array for desktop/mobile. `NavigationDisclosure` keeps closed links in server HTML, supports Tab/Escape, outside click and focus-leave dismissal. Local CSS adapts free Arc Popover styling; source, MIT license and rationale are in `docs/arc-navigation.md`. No new application dependency. Tests: `bun test tests/competition-navigation.test.tsx`, HTTP `node --test tests/navigation.test.mjs`, browser `node tests/navigation.browser.mjs` with `PLAYWRIGHT_MODULE` and `CHROMIUM_PATH` pointing to test tooling. Use a local production server for interaction checks; test requests to analytics are blocked.
+- HTTP regression tests (running server at port 3123): `node --test tests/seo-content.test.mjs tests/remes-classics.test.mjs`. Override `TEST_BASE_URL` as needed. Start dev with `/opt/data/bin/bun run dev --port 3123`. The content suite checks routes, qualified cost wording, canonicals, breadcrumbs, guide example, calculator inputs and discovery links.
+- Checks: `node_modules/.bin/eslint .` and `/opt/data/bin/bun run build`. Baseline lint has two warnings (TanStack table / anonymous Tailwind export). Planner tests and downloadable artifacts have separate owners during parallel work; do not overwrite their files.
+
+## Hover navigation
+
+- Desktop Compétitions opens on mouse hover, with a 180ms exit delay to cross the panel gap. Touch/mobile and keyboard activation remain available. Focus inside the panel prevents pointer exit from dismissing keyboard navigation.
+
 ## Development Notes
+
+- Hero eyebrow “Commencez par les inscriptions.” removed at Nicolas's request; retain H1, description, CTAs and HeroVideo.
 
 - The site uses React Compiler (feature enabled in Next.js config)
 - Uses Bun as package manager (bun.lockb present)

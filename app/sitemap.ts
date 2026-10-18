@@ -23,6 +23,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.2,
     },
+    {
+      url: `${SITE_URL}/competition-backyard`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/guides/planning-heats-competition-crossfit`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 }
 

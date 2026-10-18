@@ -1,0 +1,9 @@
+MODÈLE DE PLANNING DES HEATS — EXEMPLE ILLUSTRATIF
+
+Ouvrir modele-planning-heats.csv dans un tableur. Si les colonnes ne se séparent pas, choisir Données > À partir d’un fichier texte/CSV : UTF-8, séparateur point-virgule.
+
+Une ligne décrit un bloc division/workout. Dupliquer la ligne pour préparer d’autres blocs successifs. Compter des équipes OU des participants selon le format ; ne pas compter les membres d’une équipe comme autant de couloirs. Toutes les durées sont en minutes entières. L’heure de départ s’applique au planning entier. La pause précède le bloc ; la transition sépare ses heats et n’est jamais ajoutée après son dernier heat.
+
+Ce fichier est une trame de saisie sans formules. Il ne recalcule aucun horaire. Reporter ses valeurs dans le calculateur du guide ; aucun import CSV n’est proposé. L’export du calculateur est également figé : pour recalculer, modifier les valeurs dans le calculateur et exporter à nouveau.
+
+Le modèle est illustratif, pas le planning d’un client. Aucun nom d’athlète n’est nécessaire. Vérifier manuellement la récupération, les juges, le matériel partagé et les espaces parallèles. Le calculateur prévoit un seul espace et des blocs successifs, 12 blocs maximum et 24 h de durée totale. J+1 indique le lendemain.
