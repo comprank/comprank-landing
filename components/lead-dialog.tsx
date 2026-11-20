@@ -91,7 +91,13 @@ export function LeadDialog({ children, open, onOpenChange }: LeadDialogProps) {
     },
   });
 
-  React.useEffect(() => {
+  // Reset the form on each opening, during render rather than in an effect
+  // (https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes).
+  // useAction stays in this always-mounted component: its callbacks run in an
+  // effect, so a closed-mid-submit dialog must still fire the Lead pixel.
+  const [wasOpen, setWasOpen] = React.useState(isOpen);
+  if (isOpen !== wasOpen) {
+    setWasOpen(isOpen);
     if (isOpen) {
       setValues(EMPTY_VALUES);
       setErrors({});
@@ -99,7 +105,7 @@ export function LeadDialog({ children, open, onOpenChange }: LeadDialogProps) {
       setFailed(false);
       reset();
     }
-  }, [isOpen, reset]);
+  }
 
   const setOpen = (next: boolean) => {
     setInternalOpen(next);
