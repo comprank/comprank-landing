@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import {
   Medal,
@@ -46,10 +47,26 @@ export const metadata: Metadata = createPageMetadata({
 
 const anim = "opacity-100 translate-y-0";
 
-const homepageFaqs = [
+// `answer` stays plain text: it feeds the FAQPage JSON-LD below.
+// `content` optionally replaces it on screen when the answer needs a link.
+type HomepageFaq = { question: string; answer: string; content?: ReactNode };
+
+const registrationCostAnswer =
+  "Le module d’inscription est sans coût pour l’organisateur. CompRank ne lui facture rien : il fixe le prix de l’inscription et reçoit ce prix. L’athlète paie en plus des frais de service de 4 % + 0,50 € par inscription, frais de paiement compris. Aucune commission sur un événement gratuit (inscription à 0 €).";
+
+const homepageFaqs: HomepageFaq[] = [
   {
     question: "Quel est le coût du module d’inscription pour l’organisateur ?",
-    answer: "Le module d’inscription est sans coût pour l’organisateur. Cette indication porte sur ce module, pas sur l’ensemble des prestations. Elle ne signifie pas que les athlètes ne paient aucun frais.",
+    answer: `${registrationCostAnswer} Détail et exemples sur la page Tarifs : ${SITE_URL}/tarifs`,
+    content: (
+      <>
+        {registrationCostAnswer} Détail et exemples sur la page{" "}
+        <Link href="/tarifs" className="text-primary-400 underline underline-offset-4 hover:text-primary-300">
+          Tarifs
+        </Link>
+        .
+      </>
+    ),
   },
   {
     question: "Le classement s’actualise-t-il automatiquement ?",
@@ -426,7 +443,7 @@ function FAQSection() {
             {homepageFaqs.map((faq, index) => (
               <AccordionItem key={faq.question} value={`q${index + 1}`}>
                 <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>{faq.answer}</AccordionContent>
+                <AccordionContent>{faq.content ?? faq.answer}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
