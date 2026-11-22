@@ -6,6 +6,7 @@ const footerLinks = [
   { href: "/competition-hyrox", label: "Logiciel compétition HYROX" },
   { href: "/competition-backyard", label: "Logiciel organisation Backyard" },
   { href: "/guides/planning-heats-competition-crossfit", label: "Guide : planning des heats" },
+  { href: "/tarifs", label: "Tarifs" },
   { href: "/#offre", label: "Le jour J" },
   { href: "/#features", label: "Fonctionnalités" },
   { href: "/#faq", label: "Questions fréquentes" },

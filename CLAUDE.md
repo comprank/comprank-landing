@@ -51,6 +51,7 @@ The landing page showcases:
 - Interactive live leaderboard demonstration with real-time updates
 - Offline-capable judge app and Scorecard workflow, with App Store and Google Play badges
 - On-site "Le jour J" services: Régie live + TV live for FUNCTIONAL and RFID timing for HYROX
+- Pricing page `/tarifs`: 0 € for the organizer, 4 % + 0,50 € athlete service fee per registration
 - Advanced competition planning and scheduling features
 - Registration management with intelligent waitlist functionality
 - Real-time scoring system with progress tracking
@@ -139,6 +140,7 @@ app/                 # Next.js App Router pages
 ├── sitemap.ts       # Generated sitemap.xml
 ├── robots.txt/      # Route handler: robots.txt + Content-Signal
 ├── llms.txt/        # Route handler: /llms.txt site summary for AI agents
+├── tarifs/page.tsx  # Pricing page (validated amounts, examples table)
 └── terms/page.tsx   # Terms of service page
 
 components/          # React components
@@ -151,6 +153,7 @@ components/          # React components
 ├── phone-shell.tsx # Phone chassis for app mockups
 ├── phone-screens.tsx # Screens for PhoneShell
 ├── store-badges.tsx # App Store / Google Play badges
+├── pricing-parts.tsx # CheckItem / FaqItem used by /tarifs
 ├── header.tsx      # Site header/navigation
 ├── footer.tsx      # Site footer
 └── ...             # Other page sections
@@ -174,14 +177,23 @@ public/             # Static assets
 ## Organizer-first content and heats guide
 
 - Homepage and CrossFit/HYROX landings lead with registrations, then planning and results. The homepage renders the feature grid and approved REMES case before format and terrain sections. Lead dialogs and existing tracking implementations are unchanged.
-- Approved cost wording: **Le module d’inscription est sans coût pour l’organisateur.** Do not broaden this to all software/services, claim athletes pay no fees, or invent a payer or fee amount. Terrain services are separate, optional and on request; no TV customer proof or reliability guarantee may be invented.
+- Approved cost wording: **Le module d’inscription est sans coût pour l’organisateur.** Keep this exact sentence wherever it appears (tests depend on it). Pricing facts are now validated by Nicolas — see "Pricing page (/tarifs)" below — and are the only amounts, payers and conditions that may be stated. Do not claim athletes pay nothing on a free event (only "aucune commission"). Terrain services are separate, optional and on request; no TV customer proof or reliability guarantee may be invented.
 - `/competition-backyard` covers approved registration, lap starts/passages, retirements/timeouts, results, RFID/manual and offline functionality. Do not add automatic elimination rules, universal format compatibility or official affiliation/certification.
 - `/guides/planning-heats-competition-crossfit` includes an operational method, a labelled illustrative table, `HeatsPlanner` from `components/heats-planner.tsx`, and `/downloads/modele-planning-heats.csv`. No XLSX download is promised. Defaults: 20 teams, 6 lanes, 12-minute cap, 3-minute transition, 09:00 start, zero pause before the first block. Four heats end at 09:57 (57 minutes), with 2 teams in the last heat. There is no trailing transition. Blocks run sequentially; pauses before blocks are separate from within-block transitions. Rest, judges, shared equipment and multiple areas need organizer review.
 - New pages use self canonicals, visible and JSON-LD breadcrumbs, sitemap entries, llms.txt summaries and header/footer crosslinks. Existing canonicals remain unchanged. Mobile navigation stays active below `xl` and scrolls within the viewport.
 - No unapproved customer photos/logos or invented testimonials. The original `HeroVideo` is retained; the introductory registration example banner was removed at Nicolas's request. Do not remove existing visual assets as part of SEO copy changes without explicit approval. Terrain panels use text rather than mock result screens. Existing illustrative leaderboard/planner displays are labelled as fictitious; the REMES case remains factual.
 - Header groups CrossFit, HYROX and Backyard in `CompetitionNavigation`, using one data array for desktop/mobile. `NavigationDisclosure` keeps closed links in server HTML, supports Tab/Escape, outside click and focus-leave dismissal. Local CSS adapts free Arc Popover styling; source, MIT license and rationale are in `docs/arc-navigation.md`. No new application dependency. Tests: `bun test tests/competition-navigation.test.tsx`, HTTP `node --test tests/navigation.test.mjs`, browser `node tests/navigation.browser.mjs` with `PLAYWRIGHT_MODULE` and `CHROMIUM_PATH` pointing to test tooling. Use a local production server for interaction checks; test requests to analytics are blocked.
-- HTTP regression tests (running server at port 3123): `node --test tests/seo-content.test.mjs tests/remes-classics.test.mjs`. Override `TEST_BASE_URL` as needed. Start dev with `/opt/data/bin/bun run dev --port 3123`. The content suite checks routes, qualified cost wording, canonicals, breadcrumbs, guide example, calculator inputs and discovery links.
-- Checks: `node_modules/.bin/eslint .` and `/opt/data/bin/bun run build`. Baseline lint has two warnings (TanStack table / anonymous Tailwind export). Planner tests and downloadable artifacts have separate owners during parallel work; do not overwrite their files.
+- HTTP regression tests (running server at port 3123): `node --test tests/seo-content.test.mjs tests/remes-classics.test.mjs tests/navigation.test.mjs`. Override `TEST_BASE_URL` as needed. Start dev with `bun run dev --port 3123` (bun lives at `/opt/data/bin/bun` on some machines, `/opt/homebrew/bin/bun` on others), or prefer `bun run start --port 3123` after a build. The content suite checks routes, qualified cost wording, canonicals, breadcrumbs, guide example, calculator inputs, the /tarifs page and discovery links.
+- Checks: `node_modules/.bin/eslint . --ignore-pattern '.claude/**'` (old agent worktrees under `.claude/worktrees/` hold stale copies that report errors) and `bun run build`. If the build's type check fails on `.next/dev/types` referencing a deleted route, delete the generated `.next/dev` folder. Baseline lint has two warnings (TanStack table / anonymous Tailwind export). Planner tests and downloadable artifacts have separate owners during parallel work; do not overwrite their files.
+
+## Pricing page (/tarifs)
+
+- Validated pricing facts (Nicolas), the only source of truth for amounts: the organizer sets the registration price and CompRank charges the organizer nothing. The athlete pays, on top of that price, a service fee of **4 % + 0,50 € per registration**. Payment fees (Stripe) are included in that fee, so the organizer receives the price they set. Free event (0 € registration): no commission. All software features are included (registrations, planning, scoring, leaderboards). Kit Régie (Régie live + TV live) and Kit Timing (RFID timing) are separate services, on request only, with no displayed price and no "à partir de".
+- Never add figures, payers or conditions beyond these: no "sans abonnement", no HT/TTC, no per-team/per-athlete rule, no "gratuit" without saying for whom, no competitor comparison, no invented testimonial or usage figure, no interactive calculator. Numeric examples come only from the three table rows: 30 € → 1,70 € → 31,70 € → 30 € ; 50 € → 2,50 € → 52,50 € → 50 € ; 80 € → 3,70 € → 83,70 € → 80 €.
+- `app/tarifs/page.tsx` (promoted from the retained "Deux colonnes" mockup; the a/b/c mockup routes were deleted). Order: single H1 + summary, "Qui paie quoi" (organizer / athlete / free event), server-rendered examples table, "Ce qui est inclus" (four rubrics with wording from existing pages), "Services terrain, sur demande" with the "Parler de votre jour J" LeadButton, visible FAQ, final CTA (LeadButton "Préparer mes inscriptions" + AppLink `placement="tarifs-cta"`).
+- `components/pricing-parts.tsx` — `CheckItem` and `FaqItem`. `FaqItem` uses native `<details>` so answers stay in the server HTML (Radix Accordion does not render closed content).
+- Structured data: BreadcrumbList only — no FAQPage on this page. Self canonical, indexed, in the sitemap (priority 0.8), in `/llms.txt` (dedicated "Tarifs" section with the amounts) and linked as "Tarifs" in the header (desktop + mobile) and footer. Header "FAQ" is kept: at 1280 px the desktop nav still fits with room to spare.
+- Homepage FAQ "Quel est le coût du module d’inscription pour l’organisateur ?" states the amounts and links to /tarifs. `homepageFaqs` entries keep `answer` as plain text for the FAQPage JSON-LD; an optional `content` ReactNode replaces it on screen when a link is needed.
 
 ## Hover navigation
 

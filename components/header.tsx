@@ -15,6 +15,7 @@ const navigation = [
   { href: "/guides/planning-heats-competition-crossfit", label: "Guide heats" },
   { href: "/#features", label: "Fonctionnalités" },
   { href: "/#offre", label: "Le jour J" },
+  { href: "/tarifs", label: "Tarifs" },
   { href: "/#faq", label: "FAQ" },
 ];
 
