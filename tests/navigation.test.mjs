@@ -12,5 +12,5 @@ test("header has grouped competition navigation with server-rendered native link
   for (const route of ["crossfit", "hyrox", "backyard"]) {
     assert.equal((header.match(new RegExp(`href="/competition-${route}"`, "g")) || []).length, 2);
   }
-  for (const label of ["Guide heats", "Fonctionnalités", "Le jour J", "FAQ"]) assert.ok(header.includes(label));
+  for (const label of ["Guide heats", "Fonctionnalités", "Le jour J", "Tarifs", "FAQ"]) assert.ok(header.includes(label));
 });

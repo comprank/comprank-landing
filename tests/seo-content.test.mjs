@@ -39,3 +39,33 @@ test('organizer landing starts with registrations and qualified cost claim', asy
     assert.ok(html.includes(`rel="canonical" href="https://www.comprank.fr${path === '/' ? '' : path}`));
   }
 });
+test('pricing page states validated amounts with breadcrumb and examples table', async () => {
+  const html = await page('/tarifs');
+  assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
+  assert.match(html, /rel="canonical" href="https:\/\/www.comprank.fr\/tarifs"/);
+  assert.doesNotMatch(html, /<meta name="robots" content="[^"]*noindex/);
+  assert.ok(html.includes('id="contenu"'));
+  assert.ok(html.includes('"@type":"BreadcrumbList"'), 'breadcrumb JSON-LD');
+  assert.doesNotMatch(html, /"@type":"FAQPage"/);
+  assert.ok(html.includes('aria-label="Fil d’Ariane"'));
+  const table = html.match(/<table\b[\s\S]*?<\/table>/)?.[0];
+  assert.ok(table, 'examples table is server rendered');
+  for (const heading of ['Prix fixé par l’organisateur', 'Frais de service', 'L’athlète paie', 'L’organisateur reçoit']) assert.ok(table.includes(heading), heading);
+  const rows = [...table.matchAll(/<tr\b[\s\S]*?<\/tr>/g)].map(([row]) => row.replace(/<[^>]+>/g, ' ').replace(/&nbsp;| /g, ' ').replace(/\s+/g, ' ').trim());
+  for (const [price, fee, athlete, organizer] of [['30 €', '1,70 €', '31,70 €', '30 €'], ['50 €', '2,50 €', '52,50 €', '50 €'], ['80 €', '3,70 €', '83,70 €', '80 €']]) {
+    assert.ok(rows.some(row => row === `${price} + ${fee} ${athlete} ${organizer}`), `row ${price}`);
+  }
+  for (const term of ['4 % + 0,50 €', 'Stripe', 'aucune commission', 'Kit Régie', 'Kit Timing', 'Parler de votre jour J', 'Préparer mes inscriptions']) assert.ok(html.replace(/&nbsp;| /g, ' ').includes(term), term);
+  assert.doesNotMatch(html, /sans abonnement|HT\b|TTC/);
+});
+test('pricing page is linked from header, footer, sitemap and AI summary', async () => {
+  const home = await page('/');
+  const header = home.match(/<header\b[\s\S]*?<\/header>/)?.[0];
+  const footer = home.match(/<footer\b[\s\S]*?<\/footer>/)?.[0];
+  assert.equal((header.match(/href="\/tarifs"/g) ?? []).length, 2, 'desktop and mobile header links');
+  assert.ok(footer.includes('href="/tarifs"'), 'footer link');
+  assert.ok((await page('/sitemap.xml')).includes('https://www.comprank.fr/tarifs'));
+  const llms = await page('/llms.txt');
+  for (const term of ['https://www.comprank.fr/tarifs', '4 % + 0,50 €', 'aucune commission']) assert.ok(llms.includes(term), term);
+  for (const mock of ['/tarifs-a', '/tarifs-b', '/tarifs-c']) assert.equal((await fetch(new URL(mock, base))).status, 404, mock);
+});
